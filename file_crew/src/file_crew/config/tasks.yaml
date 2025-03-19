@@ -1,0 +1,37 @@
+research_task:
+  description: >
+    Parse and analyze markdown documents {file_text} to identify key developments and relevant information.
+    Focus on extracting factual statements, key findings, and notable trends within the documents.
+  expected_output: >
+    A structured report containing the following sections, derived from the analyzed markdown documents:
+    
+    1. Key Points (Concise Summary):
+    - A list of 5-7 bullet points summarizing the most critical and impactful findings related to {topic}.
+    - Each bullet point should be factually accurate and referenced to its source markdown document (e.g., filename, document title, section heading).
+    - Aim for clarity and conciseness, capturing the essence of the information in a single sentence.
+    
+    2. Quick Summary (Executive Overview):
+    - A brief paragraph (approximately 50-75 words) providing a high-level overview of the current state of {topic}, based on the analyzed markdown data.
+    - Highlight the most significant recent developments and their potential implications.
+    - Avoid jargon and technical terms, making it accessible to a general audience.
+    
+    3. Extended Summary (Detailed Analysis):
+    - A more in-depth summary (approximately 200-300 words) expanding on the Key Points and Quick Summary.
+    - Provide more context for the key findings, explaining their significance and potential impact.
+    - Include details on any conflicting viewpoints or ongoing debates within the analyzed documents.
+    - Maintain clear references to the source markdown documents for each key point.
+    
+    4. Actionable Insights (What We Should Take From This):
+    - A section outlining 3-5 specific actions or recommendations that can be derived from the research.
+    - These should be practical and based on the identified trends, findings, and potential implications.
+    - Examples: "Further investigate the impact of {specific technology} on {specific application}.", "Develop a strategy to address the emerging challenges related to {specific problem}.", "Monitor the progress of {specific research area} due to its potential impact on {specific field}."
+    - For each actionable insight, explain the rationale behind the recommendation and its potential benefits.
+    
+    5. Source Document List:
+    - A comprehensive list of all markdown files analyzed, including their titles and brief descriptions of their relevance to the research task.
+    
+    6. Potential Biases and Limitations:
+    - A brief paragraph acknowledging any potential biases or limitations inherent in the analyzed markdown data.
+    - This could include: Overrepresentation of certain viewpoints, Lack of coverage in specific areas, Potential for outdated information, Acknowledge if the Markdown files come from a specific source and therefore might have a bias.
+  agent: researcher
+
