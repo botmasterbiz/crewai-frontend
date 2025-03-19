@@ -1,6 +1,6 @@
 # PDF Processing with Docling and CrewAI
 
-This is a FastAPI application that uses Docling to parse PDF files and extract their content, then analyzes this content using CrewAI.
+This is a FastAPI application that uses Docling to parse PDF files and extract their content, then analyzes this content using CrewAI to generate structured reports and insights.
 
 ## Features
 
@@ -10,15 +10,47 @@ This is a FastAPI application that uses Docling to parse PDF files and extract t
 - **Markdown Export**: Returns parsed content in markdown format
 - **Clean Implementation**: Proper error handling and temporary file management
 
+## Requirements
+
+- Python 3.9+
+- FastAPI
+- Docling
+- CrewAI
+- Other dependencies as specified in requirements.txt
+
 ## Setup
 
-1. Install the required dependencies:
+1. Clone the repository:
+
+```bash
+git clone <your-repository-url>
+cd <repository-directory>
+```
+
+2. Set up a virtual environment (recommended):
+
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Run the application:
+4. Environment variables (optional):
+   
+If you want to customize the CrewAI behavior or use specific LLM models, you can create a `.env` file with appropriate settings:
+
+```
+OPENAI_API_KEY=your_openai_api_key
+MODEL_NAME=gpt-4-turbo
+# Add other environment variables as needed
+```
+
+5. Run the application:
 
 ```bash
 python app.py
@@ -77,10 +109,31 @@ fetch('http://localhost:5010/file-handler', {
 
 ## Implementation Details
 
-- The application first uses Docling to extract text content from the uploaded PDF
-- The extracted markdown content is then processed by CrewAI with a researcher agent
-- The researcher agent analyzes the content and generates a structured report
-- Both the original markdown and the AI-generated analysis are returned to the client
+### How It Works
+
+1. **PDF Processing**:
+   - The application receives a PDF file through the `/file-handler` endpoint
+   - Docling's DocumentConverter processes the PDF and extracts structured content
+   - The content is converted to markdown format for further processing
+
+2. **AI Analysis**:
+   - The markdown content is passed to the CrewAI system
+   - A researcher agent analyzes the content according to the task definition
+   - The agent generates a structured report with key points, summaries, and insights
+
+3. **Result Delivery**:
+   - Both the original markdown and the AI-generated analysis are returned to the client
+   - The response includes detailed sections as specified in the task configuration
+
+### CrewAI Task Configuration
+
+The CrewAI system is configured to analyze documents with a specific focus. The task configuration is defined in `file_crew/src/file_crew/config/tasks.yaml` and includes:
+
+- Extracting key points from the document
+- Creating executive summaries
+- Providing detailed analysis
+- Suggesting actionable insights
+- Identifying potential biases in the source material
 
 ## Testing
 
@@ -89,3 +142,36 @@ You can use the included test script to try out the API:
 ```bash
 python test_pdf_parser.py /path/to/your/file.pdf
 ```
+
+This will:
+1. Upload the specified PDF to the API
+2. Process the file through both Docling and CrewAI
+3. Display a summary of the results in the terminal
+4. Save the full results to a JSON file
+
+## Project Structure
+
+```
+.
+├── app.py                  # FastAPI application
+├── requirements.txt        # Project dependencies
+├── test_pdf_parser.py      # Test script for the API
+├── file_crew/
+│   └── src/
+│       └── file_crew/
+│           ├── main.py     # CrewAI integration
+│           └── config/
+│               └── tasks.yaml  # Task definitions for the AI analysis
+```
+
+## Troubleshooting
+
+- **PDF Parsing Issues**: Make sure the uploaded PDF is not corrupted and doesn't have DRM protection
+- **CrewAI Errors**: Check that any required environment variables are set correctly
+- **API Connection Issues**: Verify that the API is running and accessible from your client
+
+
+## Acknowledgements
+
+- [Docling](https://github.com/docling-project/docling) for PDF parsing
+- [CrewAI](https://github.com/joaomdmoura/crewAI) for AI agent orchestration
