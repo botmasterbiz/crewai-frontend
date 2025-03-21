@@ -2,6 +2,13 @@
 
 This is a FastAPI application that uses Docling to parse PDF files and extract their content, then analyzes this content using CrewAI to generate structured reports and insights.
 
+## 5 Steps:
+1. Create Frontend with Bolt.new
+2. Create FastAPI Project
+3. Create Crew
+4. Ngrok Static Domain
+5. Connect Frontend with FastAPI
+
 ## Features
 
 - **Document Parsing**: Uses Docling to extract text content from PDF files
