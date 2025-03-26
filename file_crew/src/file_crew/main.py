@@ -19,6 +19,7 @@ def run(file_text):
     """
     inputs = {
         'file_text': file_text,
+        'topic': 'Document Analysis'  # Adding a default topic
     }
     
     try:

@@ -7,9 +7,10 @@ from typing import List
 
 load_dotenv()
 
-google_flash_llm = LLM(
-	model="gemini/gemini-2.0-flash",
-	api_key=os.getenv("GOOGLE_API_KEY"),
+openai_llm = LLM(
+	model="gpt-3.5-turbo",
+	api_key=os.getenv("OPENAI_API_KEY"),
+	temperature=0.7
 )
 
 class ResearchOutput(BaseModel):
@@ -32,7 +33,7 @@ class FileCrew():
 		return Agent(
 			config=self.agents_config['researcher'],
 			verbose=True,
-			llm=google_flash_llm
+			llm=openai_llm
 		)
 
 	@task
@@ -50,5 +51,5 @@ class FileCrew():
 			agents=self.agents,
 			tasks=self.tasks,
 			process=Process.sequential,
-			verbose=True,
+			verbose=True
 		)
